@@ -1,0 +1,36 @@
+[{
+    "Instance Type": "m5a.large",
+    "Instance State": "Running",
+    "AMI Location": "509882431880/LIN_SSM_AGEN...",
+    "Tags": "e2e:resource=tr...",
+    "Account ID": "233365860087",
+    "Policies": "e2e_policy",
+    "Last Backup": "08/01/23 02:51 pm",
+    "Region": "US East (Ohio)",
+    "AMI name": "LIN_SSM_AGENTLESS",
+    "VPC ID": "vpc-0872734b71255b56c",
+    "AMI ID": "ami-0a53647d2a7c6c7f1",
+    "Launch Time": "08/01/23 02:19 pm (0 days)",
+    "Instance ID": "i-006ac8c980091eee6",
+    "Asset Type": "EC2",
+    "Platform": "Amazon Linux"
+},
+{
+    "Optimized Size": "823.48 KiB",
+    "Recovery Point Date": "08/01/23 02:51 pm",
+    "Data Size": "8.00 GiB",
+    "": "",
+    "Backup Size": "8.00 GiB"
+},
+{
+    "Recovery Point Date": "08/01/23 02:40 pm",
+    "Backup Size": "8.00 GiB",
+    "Optimized Size": "1.34 GiB",
+    "Data Size": "8.00 GiB"
+},
+{
+    "Tags": "e2e:resource=true",
+    "Created": "08/01/23 02:19 pm (0 days ago)",
+    "Volume ID": "vol-015c850dda54467ae",
+    "Size (GiB)": "8.00"
+}]
