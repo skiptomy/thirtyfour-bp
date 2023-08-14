@@ -1,10 +1,17 @@
 mod pages;
+mod remediate;
 
 use pages::{
-    dashboard::dashboard_page, filters::check_filters, inventory::inventory_page,
-    login::elastio_login, threats_page::threats_page, vul_page::vul_page, ec2_details_page::{ec2_details_page, remediate_window},
+    dashboard::dashboard_page,
+    ec2_details_page::{details_page, remediate_window},
+    filters::check_filters,
+    inventory::inventory_page,
+    login::elastio_login,
+    threats_page::threats_page,
+    vul_page::vul_page,
 };
 use regex::Regex;
+use remediate::remediate_windows::general_checks;
 use std::{collections::HashMap, time::Duration};
 use thirtyfour::prelude::*;
 
@@ -28,8 +35,11 @@ async fn main() -> WebDriverResult<()> {
     inventory_page(driver.clone()).await;
 
     // go to ec2 details page
-    ec2_details_page(driver.clone()).await;
+    details_page(driver.clone(), "ec2".to_string()).await;
     remediate_window(driver.clone()).await;
+
+    // general check for remediate
+    general_checks(driver.clone(), "clean".to_string()).await;
 
     // go to threats page
     // threats_page(driver.clone()).await;

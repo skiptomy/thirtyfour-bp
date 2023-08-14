@@ -87,10 +87,7 @@ pub async fn check_filters(driver: WebDriver, asset_type: &str, vulnerability_ty
             CyberTerm::VulnerabilityType => {
                 select_filter(driver.clone(), capitalize_each_word(vulnerability_type)).await;
                 done_execute(driver.clone()).await;
-                verify_selected_tag(
-                    driver.clone(),
-                    capitalize_each_word(vulnerability_type),
-                ).await;
+                verify_selected_tag(driver.clone(), capitalize_each_word(vulnerability_type)).await;
             }
         }
     }

@@ -5,9 +5,7 @@ use tokio::time;
 
 pub async fn vul_page(driver: WebDriver) {
     let vul_page = driver
-        .query(By::XPath(
-            "//a[@class='dashboardHeaderLink infected']",
-        ))
+        .query(By::XPath("//a[@class='dashboardHeaderLink infected']"))
         .first()
         .await
         .unwrap();

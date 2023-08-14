@@ -3,11 +3,14 @@ use std::thread;
 use thirtyfour::{prelude::ElementQueryable, By, WebDriver};
 use tokio::time;
 
-pub async fn ec2_details_page(driver: WebDriver) {
+pub async fn details_page(driver: WebDriver, asset_type: String) {
+    let details_page_path = if asset_type == "ec2" {
+        "//div[@class='ec2InventoryTableScroll']//a"
+    } else {
+        "//div[@class='ebsInventoryTableScroll']//a"
+    };
     let ec2_inventory_page = driver
-        .query(By::XPath(
-            "//div[@class='ec2InventoryTableScroll']//a",
-        ))
+        .query(By::XPath(details_page_path))
         .first()
         .await
         .unwrap();
@@ -19,9 +22,7 @@ pub async fn ec2_details_page(driver: WebDriver) {
 
 pub async fn remediate_window(driver: WebDriver) {
     let remediate_button = driver
-        .query(By::XPath(
-            "//button[contains(.,'Remediate')]",
-        ))
+        .query(By::XPath("//button[contains(.,'Remediate')]"))
         .first()
         .await
         .unwrap();
@@ -43,7 +44,6 @@ pub async fn remediate_window(driver: WebDriver) {
         println!("{:?}", remediate_window_text);
     }
 }
-
 
 // ""
 // "Account ID: 257235026455"
