@@ -3,6 +3,7 @@ use std::thread;
 use thirtyfour::{prelude::ElementQueryable, By, WebDriver};
 use tokio::time;
 
+#[allow(dead_code)]
 pub async fn threats_page(driver: WebDriver) {
     let threats_page = driver
         .query(By::XPath(

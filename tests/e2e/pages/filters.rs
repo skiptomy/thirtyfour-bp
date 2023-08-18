@@ -34,6 +34,7 @@ impl FromStr for CyberTerm {
     }
 }
 
+#[allow(dead_code)]
 pub async fn check_filters(driver: WebDriver, asset_type: &str, vulnerability_type: &str) {
     disable_all_filters(driver.clone()).await;
     let filters = driver

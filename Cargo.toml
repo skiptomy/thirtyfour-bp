@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[test]]
+name = "thirtyfour"
+harness = false
+path = "tests/e2e/main.rs"
 
 [dependencies]
 thirtyfour = "0.31.0"
@@ -11,3 +15,5 @@ tokio = { version = "1.21", features = ["sync", "parking_lot"] }
 regex = "1.5"
 serde_yaml = "0.9.14"
 chrono = "0.4"
+cucumber = { version = "0.20.0", features = ["output-junit"] }
+futures = "0.3.1"

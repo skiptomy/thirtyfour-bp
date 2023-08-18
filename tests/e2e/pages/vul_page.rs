@@ -3,6 +3,7 @@ use std::thread;
 use thirtyfour::{prelude::ElementQueryable, By, WebDriver};
 use tokio::time;
 
+#[allow(dead_code)]
 pub async fn vul_page(driver: WebDriver) {
     let vul_page = driver
         .query(By::XPath("//a[@class='dashboardHeaderLink infected']"))
