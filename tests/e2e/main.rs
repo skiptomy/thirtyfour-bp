@@ -1,12 +1,12 @@
-mod world;
 mod pages;
+mod world;
 
-use std::sync::Arc;
 use futures::FutureExt;
+use std::sync::Arc;
 
 use cucumber::World;
 use thirtyfour::{DesiredCapabilities, WebDriver};
-use world::{E2eWorld, Context};
+use world::{Context, E2eWorld};
 
 #[tokio::main]
 async fn main() {
@@ -15,7 +15,9 @@ async fn main() {
             Box::pin(async {
                 let mut caps = DesiredCapabilities::chrome();
                 caps.add_chrome_arg("--window-size=1920,1080").unwrap();
-                let web_driver = WebDriver::new("http://localhost:9515/", caps).await.unwrap();
+                let web_driver = WebDriver::new("http://localhost:9515/", caps)
+                    .await
+                    .unwrap();
                 let mut context = Context::new();
                 context.insert(web_driver);
                 world.context = Arc::new(context);

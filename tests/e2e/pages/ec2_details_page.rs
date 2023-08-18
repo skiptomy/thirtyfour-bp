@@ -21,7 +21,9 @@ pub async fn details_page(driver: WebDriver, asset_type: String) {
     thread::sleep(sleep_duration);
 
     let vul_tab = driver
-        .query(By::XPath("//button[contains(@class,'jsVcVulnerabilitiesTab')]"))
+        .query(By::XPath(
+            "//button[contains(@class,'jsVcVulnerabilitiesTab')]",
+        ))
         .first()
         .await
         .unwrap();

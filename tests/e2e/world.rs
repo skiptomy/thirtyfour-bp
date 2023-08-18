@@ -1,4 +1,8 @@
-use std::{collections::HashMap, any::{TypeId, Any}, sync::Arc};
+use std::{
+    any::{Any, TypeId},
+    collections::HashMap,
+    sync::Arc,
+};
 
 use cucumber::World;
 use tokio::io;
@@ -23,7 +27,6 @@ impl Context {
         self.data.insert(TypeId::of::<T>(), Box::new(value));
     }
 }
-
 
 #[derive(Debug, World)]
 #[world(init = Self::new)]

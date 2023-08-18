@@ -1,4 +1,4 @@
-use cucumber::{given, when, then};
+use cucumber::{given, then, when};
 
 use crate::world::E2eWorld;
 

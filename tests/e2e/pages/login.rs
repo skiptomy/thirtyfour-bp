@@ -1,6 +1,6 @@
 use std::thread;
 
-use cucumber::{given, when, then};
+use cucumber::{given, then, when};
 use thirtyfour::{prelude::ElementQueryable, By, WebDriver};
 use tokio::time;
 
