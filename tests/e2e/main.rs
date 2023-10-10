@@ -2,16 +2,18 @@ mod pages;
 mod world;
 
 use futures::FutureExt;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 
-use cucumber::World;
+use cucumber::{World, codegen::Lazy, WorldInit};
 use thirtyfour::{DesiredCapabilities, WebDriver};
 use world::{Context, E2eWorld};
+
+static CURRENT_FEATURE: Lazy<Mutex<String>> = Lazy::new(|| Mutex::new(String::new()));
 
 #[tokio::main]
 async fn main() {
     E2eWorld::cucumber()
-        .before(move |_, _, _, world| {
+        .before(move |feature, _, scenario, world| {
             Box::pin(async {
                 let mut caps = DesiredCapabilities::chrome();
                 caps.add_chrome_arg("--window-size=1920,1080").unwrap();
@@ -21,11 +23,22 @@ async fn main() {
                 let mut context = Context::new();
                 context.insert(web_driver);
                 world.context = Arc::new(context);
+
+                println!("scenario_name: {}", scenario.name);
+
+                let mut current_feature = CURRENT_FEATURE.lock().unwrap();
+                let feat_name = &feature.name;
+                if  feat_name.to_string() != *current_feature {
+                    // This is a new feature
+                    *current_feature = feature.name.clone();
+                    println!("Before feature: {}", current_feature);
+                    // Additional setup for new feature...
+                }
             })
         })
         .max_concurrent_scenarios(1)
         .fail_on_skipped()
-        .after(move |_, _, _, _, world| {
+        .after(move |_, _, _, world| {
             async move {
                 if let Some(world) = world {
                     // End the webdriver session and close the browser.
