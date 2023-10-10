@@ -1,11 +1,11 @@
 use std::{
     any::{Any, TypeId},
     collections::HashMap,
-    sync::Arc,
+    sync::Arc, convert::Infallible,
 };
+use async_trait::async_trait;
 
-use cucumber::World;
-use tokio::io;
+use cucumber::{World, WorldInit};
 
 #[derive(Debug, Default)]
 pub struct Context {
@@ -28,15 +28,16 @@ impl Context {
     }
 }
 
-#[derive(Debug, World)]
-#[world(init = Self::new)]
+#[derive(Debug, WorldInit, Clone)]
 pub struct E2eWorld {
     pub aws_account_id: Option<String>,
     pub context: Arc<Context>,
 }
 
-impl E2eWorld {
-    async fn new() -> io::Result<Self> {
+#[async_trait(?Send)]
+impl World for E2eWorld {
+    type Error = Infallible;
+    async fn new() -> Result<Self, Infallible> {
         Ok(Self {
             aws_account_id: Some("123456789012".to_string()),
             context: Default::default(),

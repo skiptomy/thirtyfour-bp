@@ -1,3 +1,5 @@
+use std::{time, thread};
+
 use cucumber::{given, then, when};
 
 use crate::world::E2eWorld;
@@ -17,4 +19,7 @@ async fn test_step(world: &mut E2eWorld) {
     let acc = "123456789012".to_string();
 
     assert_eq!(world.aws_account_id, Some(acc));
+
+    let sleep_duration = time::Duration::from_secs(10);
+    thread::sleep(sleep_duration);
 }

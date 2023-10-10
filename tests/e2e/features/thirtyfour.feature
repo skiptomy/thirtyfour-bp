@@ -1,3 +1,8 @@
 Feature: Sandbox feature
-    Scenario Outline:
-        Given I login to the website with credentials - email: testbs@elastio.com, password: GodBless21Year@
+    Scenario Outline: scenario 1-1
+        Given Test step
+        And Test step
+
+    Scenario Outline: scenario 1-2
+        Given Test step
+        And Test step
